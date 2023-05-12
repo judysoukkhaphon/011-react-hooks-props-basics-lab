@@ -1,0 +1,87 @@
+About: This is a break down of the lab instructions
+
+
+In App (component), 	
+	from 'user' (object) pass down data, as prop,  to 'home' (component). See Home.js for which data to pass.
+			syntax: 	<Home prop={user.data} />
+	from 'user' pass ~down~ 'bio' (prop) to 'About' (component).
+
+	from 'user' pass ~down~ 'github' and 'linkedIn' (links), as props, to 'About' (component)
+
+	from 'About' (component) pass 'github' and 'linkedIn' props to the 'Links' (component)
+
+
+update 'About' () {	
+	if (bio is passed && not empty string) {
+		display(<p> bio </p>)
+	} else {
+		don't display <p/>
+	}
+}
+
+
+create function Links () {
+  create <h3> tag with text content that says "links"
+  create <a> tags with href attributes and text contents both containing the github and linkedin links passed from "About"
+}
+-------------------------------------------------------------------------
+Notes:
+
+**Can't write Javascript statements inside JSX, so if/else statements don't work, had to use a ternary operator to write the conditional in the 'About' component.
+
+**{Brackets} only have to be used when inside <tag>HTML tags</tag>
+
+**Data can only be passed from the parent down to the child.
+
+**If component-A returns component-B, then Component-B is the child of Component-A.
+
+**Parent components "call" the "functions" (child components) in the form of what looks like custom HTML tags where whatever the attributes and their values are, become the "arguments" that get passed to that "function" that was "called". 
+	
+	i.e. 
+
+THE DECLARER/INITIALIZER 		(Variable/object management)
+(Baby Maker)
+------------ Parent.js -----------
+import React from "react";
+import Child from "./Child";
+	function Parent() {
+		return (
+			<div>
+				<Child {attribute = value} />	<<<----
+			</div>
+		)
+	}
+----------------------------------
+
+THE INVOKER 					(Variable/object management)
+(Baby)
+------------ Child.js ------------
+	function Child(argument) {
+		console.log(argument.attribute);		<<<----
+	}
+	export default Child;
+----------------------------------
+
+
+THE FAMILY PHOTOGRAPHER
+------------ main.js -------------
+import React from "react";
+import ReactDOM from "react-dom";
+import Parent from "./Parent";
+
+ReactDOM.render(
+	<App />, document.getElementById("root")	<<<---- Calls&Renders Parent
+	);
+
+----------------------------------
+
+
+
+THE FAMILY ALBUM
+------------ main.html -----------
+<html>
+	...
+		<div id="root"> <div/>					<<<---- Renderee
+	...
+</html>
+----------------------------------
